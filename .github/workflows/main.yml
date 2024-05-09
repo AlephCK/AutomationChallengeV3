@@ -19,12 +19,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       # Install npm dependencies, and cache them correctly
+      - name: Install Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '20.12.0'
       # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          build: npm run build
-          start: npm start
+          spec: cypress/integration/specs/**/*.js
           browser: chrome
           headless: true
       - name: Cypress Test Reports
