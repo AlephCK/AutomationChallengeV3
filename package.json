@@ -2,17 +2,23 @@
   "name": "automationchallengev3",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "npx cypress run",
-    "test-gui": "npx cypress open"
+    "test": "npx cypress run --browser chrome",
+    "test-gui": "npx cypress open",
+    "lint:fix": "eslint cypress/e2e cypress/screenplay --fix",
+    "lint": "eslint cypress/e2e cypress/screenplay"
   },
   "author": "Aleph Cruz",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^13.8.0",
+    "@babel/eslint-parser": "^7.24.5",
+    "@eslint/eslintrc": "^3.0.2",
+    "cypress": "^13.9.0",
     "cypress-dotenv": "^2.0.0",
     "cypress-mochawesome-reporter": "^3.8.2",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "eslint": "^9.2.0",
+    "eslint-plugin-cypress": "^3.2.0",
+    "eslint-plugin-mocha": "^10.4.3"
   }
 }

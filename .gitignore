@@ -1,1 +1,11 @@
+# dependencies
 node_modules
+
+# Media and reports
+cypress/reports
+cypress/screenshots
+
+# other
+.env
+.DS_Store
+.tool-versions
