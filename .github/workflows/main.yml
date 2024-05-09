@@ -27,7 +27,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          spec: cypress/integration/specs/**/*.js
+          spec: cypress/e2e/*.cy.js
           browser: chrome
           headless: true
       - name: Cypress Test Reports
