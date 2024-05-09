@@ -1,0 +1,35 @@
+name: Cypress Tests
+
+on: workflow_dispatch
+
+jobs:
+  ESLint-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Run ESLint
+        uses: actions/checkout@v2
+        with:
+          start: npm run lint
+  cypress-run:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      # Install npm dependencies, and cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm start
+          browser: chrome
+          headless: true
+      - name: Cypress Test Reports
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: Test Reports
+          path: cypress/reports/*.html
