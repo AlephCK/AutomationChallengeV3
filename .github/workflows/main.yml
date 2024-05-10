@@ -28,7 +28,7 @@ jobs:
         run: echo "${{ secrets.SAUCE_DEMO_CREDENTIALS }}" > .env
       # and run all Cypress tests
       - name: Cypress run
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v5
         with:
           spec: cypress/e2e/*.cy.js
           browser: chrome
