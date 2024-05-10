@@ -29,10 +29,10 @@ jobs:
         with:
           spec: cypress/e2e/*.cy.js
           browser: chrome
-        env:
           CYPRESS_STANDARD_USER: ${{secrets.CYPRESS_STANDARD_USER}}
           CYPRESS_LOCKED_OUT_USER: ${{secrets.CYPRESS_LOCKED_OUT_USER}}
           CYPRESS_PASSWORD: ${{secrets.CYPRESS_PASSWORD}}
+        env:
           # pass GitHub token to detect new build vs re-run build
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Cypress Test Reports
