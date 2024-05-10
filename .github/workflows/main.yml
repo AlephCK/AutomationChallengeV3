@@ -19,6 +19,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       # Install npm dependencies, and cache them correctly
+      - name: Write the cypress.env.json file 📝
+        # use quotes around the secret, as its value
+        # is simply inserted as a string into the command
+        run: |
+          echo '${{ secrets.SAUCE_DEMO_CREDENTIALS }}' > .env.example
       - name: Install Node
         uses: actions/setup-node@v1
         with:
@@ -30,6 +35,9 @@ jobs:
           spec: cypress/e2e/*.cy.js
           browser: chrome
           headless: true
+        env:
+          # pass GitHub token to detect new build vs re-run build
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Cypress Test Reports
         uses: actions/upload-artifact@v2
         if: ${{ always() }}
