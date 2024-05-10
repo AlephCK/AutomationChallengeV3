@@ -7,10 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Run ESLint
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           start: npm run lint
   cypress-run:
@@ -23,13 +23,8 @@ jobs:
         uses: actions/setup-node@v4.0.2
         with:
           node-version: '20.12.0'
-      - name: Make dotenv file
-        uses: SpicyPizza/create-envfile@v1
-        with:
-          envkey_CYPRESS_STANDARD_USER: ${{secrets.CYPRESS_STANDARD_USER}}
-          envkey_CYPRESS_LOCKED_OUT_USER: ${{secrets.CYPRESS_LOCKED_OUT_USER}}
-          envkey_CYPRESS_PASSWORD: ${{secrets.CYPRESS_PASSWORD}}
-          file_name: .env
+      - name: Create .env file
+        run: echo "${{ secrets.SAUCE_DEMO_CREDENTIALS }}" > .env
       # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v6
@@ -40,7 +35,7 @@ jobs:
           # pass GitHub token to detect new build vs re-run build
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Cypress Test Reports
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@
         if: ${{ always() }}
         with:
           name: Test Reports
