@@ -26,8 +26,7 @@ jobs:
       - name: Make dotenv file
         uses: SpicyPizza/create-envfile@v1
         with:
-          envkey_DEBUG: false
-          envkey_YPRESS_STANDARD_USER: ${{secrets.CYPRESS_STANDARD_USER}}
+          envkey_CYPRESS_STANDARD_USER: ${{secrets.CYPRESS_STANDARD_USER}}
           envkey_CYPRESS_LOCKED_OUT_USER: ${{secrets.CYPRESS_LOCKED_OUT_USER}}
           envkey_CYPRESS_PASSWORD: ${{secrets.CYPRESS_PASSWORD}}
           file_name: .env
