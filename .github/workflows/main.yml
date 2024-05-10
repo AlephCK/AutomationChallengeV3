@@ -8,11 +8,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Run ESLint
-        uses: actions/checkout@v4
-        with:
-          start: npm run lint
+        run: npm run lint
   cypress-run:
     runs-on: ubuntu-22.04
     steps:
@@ -27,7 +24,7 @@ jobs:
         run: echo "${{ secrets.SAUCE_DEMO_CREDENTIALS }}" > .env
       # and run all Cypress tests
       - name: Cypress run
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v5
         with:
           spec: cypress/e2e/*.cy.js
           browser: chrome
