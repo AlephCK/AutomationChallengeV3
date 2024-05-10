@@ -12,6 +12,10 @@ jobs:
         run: npm run lint
   cypress-run:
     runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false # https://github.com/cypress-io/github-action/issues/48
+      matrix:
+        containers: [1, 2] # Uses 2 parallel instances
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,11 +30,16 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
+          record: true
+          parallel: true # Runs test in parallel using settings above
           spec: cypress/e2e/*.cy.js
           browser: chrome
         env:
-          # pass GitHub token to detect new build vs re-run build
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          # For recording and parallelization to work you must set your CYPRESS_RECORD_KEY
+          # in GitHub repo → Settings → Secrets → Actions
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # Creating a token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Cypress Test Reports
         uses: actions/upload-artifact@v4
         if: ${{ always() }}
