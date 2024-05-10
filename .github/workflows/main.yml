@@ -20,18 +20,23 @@ jobs:
         uses: actions/checkout@v4
       # Install npm dependencies, and cache them correctly
       - name: Install Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4.0.2
         with:
           node-version: '20.12.0'
+      - name: Make dotenv file
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_DEBUG: false
+          envkey_YPRESS_STANDARD_USER: ${{secrets.CYPRESS_STANDARD_USER}}
+          envkey_CYPRESS_LOCKED_OUT_USER: ${{secrets.CYPRESS_LOCKED_OUT_USER}}
+          envkey_CYPRESS_PASSWORD: ${{secrets.CYPRESS_PASSWORD}}
+          file_name: .env
       # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
           spec: cypress/e2e/*.cy.js
           browser: chrome
-          CYPRESS_STANDARD_USER: ${{secrets.CYPRESS_STANDARD_USER}}
-          CYPRESS_LOCKED_OUT_USER: ${{secrets.CYPRESS_LOCKED_OUT_USER}}
-          CYPRESS_PASSWORD: ${{secrets.CYPRESS_PASSWORD}}
         env:
           # pass GitHub token to detect new build vs re-run build
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
