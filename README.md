@@ -1,9 +1,9 @@
 # Senior Automation Challenge Project
-This project contains the Senior Automation Challenge project from Winston Cruz that consists of:
+This project contains the Senior Automation Challenge project from Winston Cruz consists of the following:
 - Automate 10 test cases for the Sauce Demo page using Screenplay Design Pattern.
 
 ## UI Testing
-The framework containst the following 10 test cases for the webapp https://www.saucedemo.com/:
+The framework contains the following 10 test cases for the webapp https://www.saucedemo.com/:
 
 **Login**
 
@@ -63,11 +63,11 @@ CYPRESS_PASSWORD="secret_sauce"
 ```
 
 ### How To Use Cypress
-The following commands can be used in order to run the test cases:
+The following commands can be used to run the test cases:
 
 Open Cypress UI
 ```bash
-npm run test-gui
+npm run test:gui
 ```
 
 Run the e2e tests (on Cypress Run mode)
@@ -79,7 +79,7 @@ npm run test
 
 Run ESLint to fix any typos
 ```bash
-npm run lint-fix
+npm run lint:fix
 ```
 
 Run ESLint to look out for any typos
