@@ -3,6 +3,7 @@ node_modules
 
 # Media and reports
 cypress/reports
+cypress/downloads
 cypress/screenshots
 
 # other
